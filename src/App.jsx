@@ -179,11 +179,11 @@ export default function App() {
             if (ev.status === "Maintenance") popupBadge = `<span class="mini-badge muted">MAINTENANCE</span>`;
 
             const popupContent = `
-                <div style="font-family:'Plus Jakarta Sans',sans-serif; color:#fff; min-width:160px; padding:4px;">
-                    <div style="font-weight:700; font-family:'Space Grotesk'; font-size:13px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;">
+                <div style="font-family: var(--font-body); color: #fff; min-width: 160px; padding: 4px;">
+                    <div style="font-weight: 700; font-family: var(--font-header); font-size: 13px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center;">
                         <span>${ev.id}</span> ${popupBadge}
                     </div>
-                    <div style="font-size:10.5px; color:#a1a1aa; line-height:1.5; margin-bottom:8px;">
+                    <div style="font-size: 11px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 8px;">
                         <strong>Driver:</strong> ${ev.driver}<br/>
                         <strong>Battery:</strong> ${ev.battery.soc}%<br/>
                         <strong>Speed:</strong> ${ev.performance.speed} km/h
@@ -305,24 +305,24 @@ export default function App() {
 
     const fleetSocChart = {
         options: {
-            chart: { type: 'donut', background: 'transparent', foreColor: '#a1a1aa', fontFamily: 'Plus Jakarta Sans' },
+            chart: { type: 'donut', background: 'transparent', foreColor: '#94a3b8', fontFamily: 'Outfit, sans-serif' },
             labels: ['Critical (< 20%)', 'Moderate (20 - 60%)', 'Healthy (> 60%)'],
-            colors: ['#ff0055', '#ffd300', '#00ff87'],
+            colors: ['#e63946', '#ffb703', '#06d6a0'],
             plotOptions: {
                 pie: {
                     donut: {
                         size: '75%',
                         labels: {
                             show: true,
-                            name: { show: true, fontSize: '11px', fontFamily: 'Space Grotesk' },
-                            value: { show: true, fontSize: '18px', fontFamily: 'Space Grotesk', fontWeight: 'bold', color: '#fff' },
+                            name: { show: true, fontSize: '11px', fontFamily: 'Outfit, sans-serif' },
+                            value: { show: true, fontSize: '18px', fontFamily: 'Outfit, sans-serif', fontWeight: 'bold', color: '#fff' },
                             total: { show: true, label: 'Vehicles', formatter: () => vehicles.length }
                         }
                     }
                 }
             },
             stroke: { show: false },
-            legend: { position: 'bottom', labels: { colors: '#a1a1aa' } },
+            legend: { position: 'bottom', labels: { colors: '#94a3b8' } },
             dataLabels: { enabled: false },
             tooltip: { theme: 'dark' }
         },
@@ -332,16 +332,16 @@ export default function App() {
     // State of Health vs Cycles Line Chart
     const sohDegradationChart = {
         options: {
-            chart: { type: 'line', toolbar: { show: false }, background: 'transparent', foreColor: '#52525b', fontFamily: 'Plus Jakarta Sans' },
-            xaxis: { categories: vehicles.map(v => v.id), labels: { style: { colors: '#a1a1aa' } } },
+            chart: { type: 'line', toolbar: { show: false }, background: 'transparent', foreColor: '#94a3b8', fontFamily: 'Outfit, sans-serif' },
+            xaxis: { categories: vehicles.map(v => v.id), labels: { style: { colors: '#94a3b8' } } },
             yaxis: [
-                { title: { text: 'SoH %', style: { color: '#00e5ff' } }, labels: { style: { colors: '#a1a1aa' } }, max: 100, min: 80 },
-                { opposite: true, title: { text: 'Cycles', style: { color: '#a1a1aa' } }, labels: { style: { colors: '#a1a1aa' } } }
+                { title: { text: 'SoH %', style: { color: '#fd9e02' } }, labels: { style: { colors: '#94a3b8' } }, max: 100, min: 80 },
+                { opposite: true, title: { text: 'Cycles', style: { color: '#fb8500' } }, labels: { style: { colors: '#94a3b8' } } }
             ],
-            colors: ['#00e5ff', '#a1a1aa'],
+            colors: ['#fd9e02', '#fb8500'],
             stroke: { width: [3, 2], curve: 'smooth' },
-            grid: { borderColor: '#222226' },
-            legend: { labels: { colors: '#a1a1aa' } },
+            grid: { borderColor: 'rgba(255, 255, 255, 0.05)' },
+            legend: { labels: { colors: '#94a3b8' } },
             tooltip: { theme: 'dark' }
         },
         series: [
@@ -353,13 +353,13 @@ export default function App() {
     // Live Telemetry Line Chart
     const liveTelemetryChart = {
         options: {
-            chart: { id: 'realtime-telemetry', type: 'line', toolbar: { show: false }, animations: { enabled: true, easing: 'linear', dynamicAnimation: { speed: 1000 } }, background: 'transparent', foreColor: '#52525b', fontFamily: 'Plus Jakarta Sans' },
+            chart: { id: 'realtime-telemetry', type: 'line', toolbar: { show: false }, animations: { enabled: true, easing: 'linear', dynamicAnimation: { speed: 1000 } }, background: 'transparent', foreColor: '#94a3b8', fontFamily: 'Outfit, sans-serif' },
             stroke: { width: 2.5, curve: 'smooth' },
-            colors: ['#ff0055', '#00e5ff', '#00ff87'],
+            colors: ['#e63946', '#fd9e02', '#06d6a0'],
             xaxis: { type: 'numeric', range: 10, labels: { show: false } },
-            yaxis: { labels: { style: { colors: '#a1a1aa' } }, min: 0, max: 120 },
-            grid: { borderColor: '#222226' },
-            legend: { labels: { colors: '#a1a1aa' } },
+            yaxis: { labels: { style: { colors: '#94a3b8' } }, min: 0, max: 120 },
+            grid: { borderColor: 'rgba(255, 255, 255, 0.05)' },
+            legend: { labels: { colors: '#94a3b8' } },
             tooltip: { theme: 'dark' }
         },
         series: [
@@ -394,11 +394,11 @@ export default function App() {
 
     const componentWearChart = {
         options: {
-            chart: { type: 'bar', toolbar: { show: false }, background: 'transparent', foreColor: '#a1a1aa', fontFamily: 'Plus Jakarta Sans' },
+            chart: { type: 'bar', toolbar: { show: false }, background: 'transparent', foreColor: '#94a3b8', fontFamily: 'Outfit, sans-serif' },
             plotOptions: { bar: { borderRadius: 3, horizontal: true, distributed: true, barHeight: '50%' } },
-            xaxis: { categories: ['Battery Deg', 'Brake Wear', 'Tire Wear', 'Motor Stress'], labels: { style: { colors: '#a1a1aa' } }, max: 100 },
-            colors: ['#00e5ff', '#ffd300', '#a1a1aa', '#ff0055'],
-            grid: { borderColor: '#222226' },
+            xaxis: { categories: ['Battery Deg', 'Brake Wear', 'Tire Wear', 'Motor Stress'], labels: { style: { colors: '#94a3b8' } }, max: 100 },
+            colors: ['#fd9e02', '#ffb703', '#cbd5e1', '#e63946'],
+            grid: { borderColor: 'rgba(255, 255, 255, 0.05)' },
             legend: { show: false },
             tooltip: { theme: 'dark' }
         },
@@ -419,9 +419,9 @@ export default function App() {
     const getAIDiagnosticReport = () => {
         if (!activeEV || activeEV.dtcCodes.length === 0) {
             return (
-                <div style={{ border: '1px dashed var(--panel-border)', padding: '16px', borderRadius: '6px', textAlign: 'center', color: 'var(--text-muted)' }}>
-                    <i className="fa-solid fa-microchip" style={{ fontSize: '24px', marginBottom: '10px', color: 'var(--text-muted)' }}></i>
-                    <p style={{ fontSize: '12px' }}>No active faults. AI Diagnostics reports all vehicle operations optimal. Routine check recommended in 2,500 km.</p>
+                <div style={{ border: '1px dashed rgba(0, 242, 254, 0.15)', padding: '20px', borderRadius: '10px', textAlign: 'center', color: 'var(--text-secondary)', background: 'rgba(0, 242, 254, 0.02)', fontFamily: 'var(--font-mono)' }}>
+                    <i className="fa-solid fa-microchip" style={{ fontSize: '28px', marginBottom: '12px', color: 'var(--primary)', filter: 'drop-shadow(0 0 5px var(--primary-glow))' }}></i>
+                    <p style={{ fontSize: '12px' }}>SYSTEM OPTIMAL: No active sensor exceptions. AI Copilot diagnostics report zero anomalies.</p>
                 </div>
             );
         }
@@ -471,18 +471,18 @@ export default function App() {
         }
 
         return (
-            <div style={{ background: '#18181c', border: '1px solid var(--panel-border)', borderRadius: '6px', padding: '16px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px', borderBottom: '1px solid var(--panel-border)', paddingBottom: '8px' }}>
-                    <span style={{ fontFamily: 'Space Grotesk', fontSize: '11px', fontWeight: '700', color: 'var(--primary)' }}>{workOrderId}</span>
-                    <span style={{ fontSize: '10px', color: 'var(--warning)', textTransform: 'uppercase', fontFamily: 'Space Grotesk' }}>{bay}</span>
+            <div style={{ background: 'rgba(3, 5, 12, 0.5)', border: '1px solid rgba(0, 242, 254, 0.15)', borderRadius: '10px', padding: '20px', fontFamily: 'var(--font-mono)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '14px', borderBottom: '1px solid rgba(255, 255, 255, 0.05)', paddingBottom: '10px' }}>
+                    <span style={{ fontSize: '12px', fontWeight: '700', color: 'var(--primary)' }}>{workOrderId}</span>
+                    <span style={{ fontSize: '11px', color: 'var(--warning)', fontWeight: '700', textTransform: 'uppercase' }}>{bay}</span>
                 </div>
-                <div style={{ fontSize: '12px', lineHeight: '1.5', color: 'var(--text-secondary)', marginBottom: '12px' }}>
-                    <strong>Tech:</strong> {tech}<br />
-                    <strong>AI Diagnose:</strong> Anomaly telemetry triggered code <strong>{activeCode}</strong>.
+                <div style={{ fontSize: '12.5px', lineHeight: '1.6', color: 'var(--text-secondary)', marginBottom: '14px' }}>
+                    <strong>DIAGNOSTICIAN:</strong> {tech}<br />
+                    <strong>EXCEPTION:</strong> Sensor anomaly triggered telemetry fault code <strong style={{ color: 'var(--danger)' }}>{activeCode}</strong>.
                 </div>
-                <div style={{ fontSize: '11px', background: '#121215', border: '1px solid var(--panel-border)', borderRadius: '4px', padding: '10px', color: 'var(--text-secondary)' }}>
-                    <strong style={{ color: '#fff', display: 'block', marginBottom: '6px', fontFamily: 'Space Grotesk' }}>Remedy Action Sheet:</strong>
-                    {steps.map((s, idx) => <div key={idx} style={{ marginBottom: '4px' }}>{s}</div>)}
+                <div style={{ fontSize: '12px', background: 'rgba(0, 0, 0, 0.3)', border: '1px solid rgba(255, 255, 255, 0.03)', borderRadius: '6px', padding: '12px', color: 'var(--text-secondary)' }}>
+                    <strong style={{ color: '#fff', display: 'block', marginBottom: '8px' }}>REMEDY INSTRUCTIONS:</strong>
+                    {steps.map((s, idx) => <div key={idx} style={{ marginBottom: '6px' }}>{s}</div>)}
                 </div>
             </div>
         );
